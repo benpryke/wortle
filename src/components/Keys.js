@@ -21,6 +21,7 @@ const styles = {
 const specialKeyStyle = {
   width: "14%",
   maxWidth: 80,
+  fontSize: "1.5rem",
 };
 
 export function Key({ onClick, disabled = false, style = {}, children }) {
@@ -99,7 +100,7 @@ export function BackspaceKey() {
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={specialKeyStyle}>
-      {"<"}
+      {"⬅"}
     </Key>
   );
 }
@@ -146,7 +147,7 @@ export function EnterKey() {
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={specialKeyStyle}>
-      {"#"}
+      {"✔"}
     </Key>
   );
 }
