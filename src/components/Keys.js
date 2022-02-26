@@ -67,7 +67,7 @@ export function LetterKey({ letter }) {
     }
   }
 
-  const handleClick = () => {
+  const handleClick = React.useCallback(() => {
     const guess = guesses[guesses.length - 1];
 
     if (guess.length < 5) {
@@ -76,7 +76,18 @@ export function LetterKey({ letter }) {
       newGuesses.splice(guesses.length - 1, 1, newGuess);
       setGuesses(newGuesses);
     }
-  };
+  }, [letter, guesses, setGuesses]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key.toUpperCase() === letter) {
+        handleClick();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [letter, handleClick]);
 
   return (
     <Key onClick={handleClick} style={style}>
@@ -89,7 +100,7 @@ export function BackspaceKey() {
   const { guesses, setGuesses } = React.useContext(GameContext);
   const disabled = guesses[guesses.length - 1].length === 0;
 
-  const handleClick = () => {
+  const handleClick = React.useCallback(() => {
     const guess = guesses[guesses.length - 1];
 
     if (guess.length > 0) {
@@ -98,7 +109,18 @@ export function BackspaceKey() {
       newGuesses.splice(guesses.length - 1, 1, newGuess);
       setGuesses(newGuesses);
     }
-  };
+  }, [guesses, setGuesses]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!disabled && event.key === "Backspace") {
+        handleClick();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [disabled, handleClick]);
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={specialKeyStyle}>
@@ -120,7 +142,7 @@ export function EnterKey() {
   const guess = guesses[guesses.length - 1];
   const disabled = guess.length < 5 || config.valid.indexOf(guess) === -1;
 
-  const checkGuess = () => {
+  const checkGuess = React.useCallback(() => {
     const newGreens = new Set(greens);
     const newYellows = [...yellows];
 
@@ -136,14 +158,25 @@ export function EnterKey() {
 
     setGreens(newGreens);
     setYellows(newYellows);
-  };
+  }, [answer, greens, setGreens, yellows, setYellows, guess]);
 
-  const handleClick = () => {
+  const handleClick = React.useCallback(() => {
     if (guess.length === 5 && guesses.length <= 6) {
       checkGuess();
       setGuesses([...guesses, ""]);
     }
-  };
+  }, [guess, guesses, setGuesses, checkGuess]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!disabled && event.key === "Enter") {
+        handleClick();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [disabled, handleClick]);
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={specialKeyStyle}>

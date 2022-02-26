@@ -25,6 +25,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    textAlign: "center",
   },
   example: {
     display: "flex",

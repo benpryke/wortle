@@ -24,7 +24,6 @@ import config from "./config.json";
  * Answers
  * Handle umlauts
  * Animations
- * Keyboard input
  */
 
 const styles = {
