@@ -7,7 +7,6 @@ const styles = {
     zIndex: 9999,
     position: "absolute",
     width: "100%",
-    height: "100%",
     background: "rgba(0, 0, 0, 0.5)",
     display: "flex",
     alignItems: "center",
@@ -17,7 +16,6 @@ const styles = {
     padding: "2rem",
     margin: "3rem",
     width: "80%",
-    height: "80%",
     background: "white",
   },
   heading: {

@@ -5,8 +5,6 @@ export const HEADER_HEIGHT = 45;
 
 const styles = {
   root: {
-    position: "sticky",
-    top: 0,
     width: "100vw",
     height: HEADER_HEIGHT,
     fontFamily: "Sura",
