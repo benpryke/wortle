@@ -151,8 +151,6 @@ export function EnterKey() {
       if (answer[i] === letter) {
         newGreens.add(i);
       } else if (answer.includes(letter)) {
-        // TODO
-        // (temp.match(/is/g) || []).length
         newYellows.push(letter);
       }
     });

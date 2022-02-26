@@ -18,7 +18,6 @@ import config from "./config.json";
  *
  * Winning
  * Statistics
- * Proper yellows handling
  * Persist game state
  * Handle ss in valid answers
  * Answers
