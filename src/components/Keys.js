@@ -44,6 +44,7 @@ export function Key({ onClick, disabled = false, style = {}, children }) {
 export function LetterKey({ letter }) {
   const { answer, guesses, setGuesses, greens, yellows, theme } =
     React.useContext(GameContext);
+  const disabled = greens.size === 5;
   const style = {};
   const isGreen = answer
     .split("")
@@ -80,17 +81,17 @@ export function LetterKey({ letter }) {
 
   React.useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key.toUpperCase() === letter) {
+      if (!disabled && event.key.toUpperCase() === letter) {
         handleClick();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [letter, handleClick]);
+  }, [letter, disabled, handleClick]);
 
   return (
-    <Key onClick={handleClick} style={style}>
+    <Key onClick={handleClick} disabled={disabled} style={style}>
       {letter}
     </Key>
   );
