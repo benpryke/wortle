@@ -16,10 +16,9 @@ import config from "./config.json";
 /**
  * TODOS
  *
- * Winning
  * Statistics
+ * Winning
  * Persist game state
- * Answers
  * Animations
  */
 
@@ -30,8 +29,15 @@ const styles = {
   height: `calc(100vh - ${HEADER_HEIGHT + 1}px)`,
 };
 
+function chooseAnswer() {
+  const start = new Date("Feb 26 2022").getTime();
+  const now = new Date().getTime();
+  const elapsedDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
+  return config.answers[elapsedDays % config.answers.length];
+}
+
 export function App() {
-  const answer = config.answers[0];
+  const answer = chooseAnswer();
   const [guesses, setGuesses] = React.useState([""]);
   const [greens, setGreens] = React.useState(new Set());
   const [yellows, setYellows] = React.useState([]);
