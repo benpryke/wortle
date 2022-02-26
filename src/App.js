@@ -19,9 +19,7 @@ import config from "./config.json";
  * Winning
  * Statistics
  * Persist game state
- * Handle ss in valid answers
  * Answers
- * Handle umlauts
  * Animations
  */
 

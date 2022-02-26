@@ -27,11 +27,12 @@ export function Keyboard() {
         <LetterKey letter="E" />
         <LetterKey letter="R" />
         <LetterKey letter="T" />
-        <LetterKey letter="Y" />
+        <LetterKey letter="Z" />
         <LetterKey letter="U" />
         <LetterKey letter="I" />
         <LetterKey letter="O" />
         <LetterKey letter="P" />
+        <LetterKey letter="Ü" />
       </div>
       <div style={rowStyle}>
         <LetterKey letter="A" />
@@ -43,10 +44,13 @@ export function Keyboard() {
         <LetterKey letter="J" />
         <LetterKey letter="K" />
         <LetterKey letter="L" />
+        <LetterKey letter="Ö" />
+        <LetterKey letter="Ä" />
       </div>
       <div style={rowStyle}>
         <EnterKey />
-        <LetterKey letter="Z" />
+        <LetterKey letter="ß" />
+        <LetterKey letter="Y" />
         <LetterKey letter="X" />
         <LetterKey letter="C" />
         <LetterKey letter="V" />
