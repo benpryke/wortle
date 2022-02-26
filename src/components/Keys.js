@@ -1,6 +1,8 @@
 import React from "react";
 import { GameContext } from "../GameContext";
 
+import config from "../config";
+
 const styles = {
   display: "flex",
   alignItems: "center",
@@ -115,13 +117,14 @@ export function EnterKey() {
     yellows,
     setYellows,
   } = React.useContext(GameContext);
-  const disabled = guesses[guesses.length - 1].length < 5;
+  const guess = guesses[guesses.length - 1];
+  const disabled = guess.length < 5 || config.valid.indexOf(guess) === -1;
 
-  const checkAnswer = (word) => {
+  const checkGuess = () => {
     const newGreens = new Set(greens);
     const newYellows = [...yellows];
 
-    word.split("").forEach((letter, i) => {
+    guess.split("").forEach((letter, i) => {
       if (answer[i] === letter) {
         newGreens.add(i);
       } else if (answer.includes(letter)) {
@@ -136,12 +139,9 @@ export function EnterKey() {
   };
 
   const handleClick = () => {
-    const guess = guesses[guesses.length - 1];
-
     if (guess.length === 5 && guesses.length <= 6) {
-      const newGuesses = [...guesses, ""];
-      setGuesses(newGuesses);
-      checkAnswer(guess);
+      checkGuess();
+      setGuesses([...guesses, ""]);
     }
   };
 

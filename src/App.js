@@ -19,9 +19,8 @@ import config from "./config.json";
  * Winning
  * Statistics
  * Proper yellows handling
- * Handle ss in valid answers
  * Persist game state
- * Validate answers
+ * Handle ss in valid answers
  * Answers
  * Handle umlauts
  * Animations
