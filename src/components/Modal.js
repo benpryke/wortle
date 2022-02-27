@@ -1,5 +1,6 @@
 import React from "react";
 import { theme } from "../GameContext";
+import { Button } from "./Button";
 
 const styles = {
   backdrop: {
@@ -26,6 +27,8 @@ const styles = {
     top: "0.5rem",
     right: "1rem",
     fontSize: "1.5rem",
+    background: "none",
+    color: theme.palette.text,
   },
 };
 
@@ -34,7 +37,7 @@ export function Modal({ isOpen, close, children }) {
     isOpen && (
       <div onClick={close} style={styles.backdrop}>
         <div style={styles.modal}>
-          <div style={styles.close}>✖</div>
+          <Button style={styles.close}>✖</Button>
           {children}
         </div>
       </div>

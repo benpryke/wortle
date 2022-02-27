@@ -8,6 +8,7 @@ const styles = {
   borderRadius: 5,
   color: "white",
   background: theme.palette.green,
+  cursor: "pointer",
 };
 
 export function Button({ onClick, style = {}, children }) {
