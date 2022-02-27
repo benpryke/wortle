@@ -16,6 +16,7 @@ const styles = {
     padding: "2rem",
     margin: "3rem",
     width: "80%",
+    maxWidth: 500,
     background: "white",
   },
   close: {
