@@ -1,4 +1,5 @@
 import React from "react";
+import { theme } from "../GameContext";
 
 const styles = {
   backdrop: {
@@ -17,7 +18,8 @@ const styles = {
     margin: "3rem",
     width: "80%",
     maxWidth: 500,
-    background: "white",
+    background: theme.palette.background,
+    color: theme.palette.text,
   },
   close: {
     position: "absolute",

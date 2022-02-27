@@ -1,5 +1,5 @@
 import React from "react";
-import { GameContext } from "../GameContext";
+import { GameContext, theme } from "../GameContext";
 
 const styles = {
   display: "flex",
@@ -7,7 +7,7 @@ const styles = {
   alignItems: "center",
   width: 65,
   height: 65,
-  border: "2px solid lightgrey",
+  border: `2px solid ${theme.palette.outline}`,
   boxSizing: "border-box",
   margin: 2,
   fontSize: "2rem",

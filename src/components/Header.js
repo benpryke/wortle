@@ -1,5 +1,5 @@
 import React from "react";
-import { GameContext } from "../GameContext";
+import { GameContext, theme } from "../GameContext";
 
 export const HEADER_HEIGHT = 45;
 
@@ -9,10 +9,12 @@ const styles = {
     height: HEADER_HEIGHT,
     fontFamily: "Sura",
     textAlign: "center",
-    borderBottom: "1px solid lightgrey",
+    borderBottom: `1px solid ${theme.palette.outline}`,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    background: theme.palette.background,
+    color: theme.palette.text,
   },
   actions: {
     display: "flex",

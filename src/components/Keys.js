@@ -1,5 +1,5 @@
 import React from "react";
-import { GameContext } from "../GameContext";
+import { GameContext, theme } from "../GameContext";
 
 import config from "../config";
 
@@ -17,7 +17,7 @@ const styles = {
   fontSize: "1rem",
   lineHeight: "4rem",
   fontWeight: "500",
-  background: "#d9d9d9",
+  background: theme.palette.key,
 };
 
 const specialKeyStyle = {
@@ -31,7 +31,7 @@ export function Key({ onClick, disabled = false, style = {}, children }) {
   style = { ...styles, ...style };
 
   if (disabled) {
-    style.background = "#f3f3f3";
+    style.background = theme.palette.disabledKey;
   }
 
   return (

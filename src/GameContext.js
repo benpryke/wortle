@@ -2,12 +2,34 @@ import React from "react";
 
 const PERSISTED_KEY = "persisted";
 
+const darkMode =
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const lightPalette = {
+  background: "#fff",
+  text: "#222",
+  key: "#d9d9d9",
+  disabledKey: "#f3f3f3",
+  green: "#4bd841",
+  yellow: "#c9b545",
+  grey: "#999999",
+  outline: "lightgrey",
+};
+
+const darkPalette = {
+  background: "#333333",
+  text: "#fff",
+  key: "#595959",
+  disabledKey: "#4d4d4d",
+  green: "#31be27",
+  yellow: "#b8a223",
+  grey: "#808080",
+  outline: "#737373",
+};
+
 export const theme = {
-  palette: {
-    green: "#4bd841",
-    yellow: "#c9b545",
-    grey: "#999999",
-  },
+  palette: darkMode ? darkPalette : lightPalette,
 };
 
 export const INITIAL_PERSISTED_STATE = {

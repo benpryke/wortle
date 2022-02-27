@@ -20,7 +20,7 @@ import { GlobalSnackbar } from "./components/GlobalSnackbar";
 /**
  * TODOS
  *
- * Dark theme
+ * Link to source
  * Translate words to English?
  * Animations
  */
@@ -32,6 +32,8 @@ const styles = {
   flexDirection: "column",
   alignItems: "center",
   height: `calc(100vh - ${HEADER_HEIGHT + 1}px)`,
+  background: theme.palette.background,
+  color: theme.palette.text,
 };
 
 export function App() {
