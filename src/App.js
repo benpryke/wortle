@@ -3,6 +3,7 @@ import React from "react";
 import {
   GameContext,
   getPersistedData,
+  INITIAL_PERSISTED_STATE,
   setPersistedData,
   theme,
 } from "./GameContext";
@@ -12,15 +13,19 @@ import { Instructions } from "./components/Instructions";
 import { Keyboard } from "./components/Keyboard";
 
 import config from "./config.json";
+import { Stats } from "./components/Stats";
+import { chooseAnswer, isTimestampToday } from "./utils";
+import { GlobalSnackbar } from "./components/GlobalSnackbar";
 
 /**
  * TODOS
  *
- * Statistics
- * Winning
- * Persist game state
+ * Dark theme
+ * Translate words to English?
  * Animations
  */
+
+const SNACKBAR_DELAY = 5000;
 
 const styles = {
   display: "flex",
@@ -29,22 +34,38 @@ const styles = {
   height: `calc(100vh - ${HEADER_HEIGHT + 1}px)`,
 };
 
-function chooseAnswer() {
-  const start = new Date("Feb 26 2022").getTime();
-  const now = new Date().getTime();
-  const elapsedDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
-  return config.answers[elapsedDays % config.answers.length];
-}
-
 export function App() {
-  const answer = chooseAnswer();
-  const [guesses, setGuesses] = React.useState([""]);
-  const [greens, setGreens] = React.useState(new Set());
-  const [yellows, setYellows] = React.useState([]);
-  const [persisted, setPersisted] = React.useState(getPersistedData());
+  const answer = chooseAnswer(config);
+  const persistedData = getPersistedData();
+  const rehydrate = isTimestampToday(persistedData.currentGame.timestamp);
+  const [guesses, setGuesses] = React.useState(
+    rehydrate
+      ? persistedData.currentGame.guesses
+      : INITIAL_PERSISTED_STATE.currentGame.guesses
+  );
+  const [greens, setGreens] = React.useState(
+    rehydrate
+      ? persistedData.currentGame.greens
+      : INITIAL_PERSISTED_STATE.currentGame.greens
+  );
+  const [yellows, setYellows] = React.useState(
+    rehydrate
+      ? persistedData.currentGame.yellows
+      : INITIAL_PERSISTED_STATE.currentGame.yellows
+  );
+  const [persisted, setPersisted] = React.useState(persistedData);
+  const [statsOpen, setStatsOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarMsg, setSnackbarMsg] = React.useState("");
   const [instructionsOpen, setInstructionsOpen] = React.useState(
     persisted.firstTime
   );
+
+  const openSnackbar = (msg) => {
+    setSnackbarOpen(true);
+    setSnackbarMsg(msg);
+    setTimeout(() => setSnackbarOpen(false), SNACKBAR_DELAY);
+  };
 
   const handleSetPersisted = (data) => {
     setPersisted(data);
@@ -63,19 +84,26 @@ export function App() {
     persisted,
     setPersisted: handleSetPersisted,
     ui: {
+      statsOpen,
+      setStatsOpen,
       instructionsOpen,
       setInstructionsOpen,
+      snackbarOpen,
+      snackbarMsg,
+      openSnackbar,
     },
   };
 
   return (
     <GameContext.Provider value={state}>
       <Instructions />
+      <Stats />
       <Header />
       <div style={styles}>
         <Grid />
         <Keyboard />
       </div>
+      <GlobalSnackbar />
     </GameContext.Provider>
   );
 }

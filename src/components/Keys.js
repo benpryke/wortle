@@ -139,6 +139,9 @@ export function EnterKey() {
     setGreens,
     yellows,
     setYellows,
+    persisted,
+    setPersisted,
+    ui,
   } = React.useContext(GameContext);
   const guess = guesses[guesses.length - 1];
   const disabled = guess.length < 5 || config.valid.indexOf(guess) === -1;
@@ -146,6 +149,8 @@ export function EnterKey() {
   const checkGuess = React.useCallback(() => {
     const newGreens = new Set(greens);
     const newYellows = [...yellows];
+    const newGuesses = [...guesses, ""];
+    const newPersisted = { ...persisted };
 
     guess.split("").forEach((letter, i) => {
       if (answer[i] === letter) {
@@ -155,27 +160,75 @@ export function EnterKey() {
       }
     });
 
+    if (newGreens.size === 5) {
+      // Winner :D
+      const wins = persisted.stats.wins + 1;
+      const streak = persisted.stats.streak + 1;
+      const bestStreak =
+        streak > persisted.stats.bestStreak
+          ? streak
+          : persisted.stats.bestStreak;
+      const tries = guesses.length;
+      const solves = [...persisted.stats.solves];
+      solves.splice(tries - 1, 1, persisted.stats.solves[tries - 1] + 1);
+      newPersisted.stats = {
+        ...persisted.stats,
+        wins,
+        streak,
+        bestStreak,
+        solves,
+      };
+      ui.setStatsOpen(true);
+    } else if (guesses.length === 6) {
+      // Loser :(
+      const losses = persisted.stats.losses + 1;
+      const streak = 0;
+      newPersisted.stats = { ...persisted.stats, losses, streak };
+      ui.setStatsOpen(true);
+    }
+
+    newPersisted.currentGame = {
+      ...persisted.currentGame,
+      guesses: newGuesses,
+      greens: newGreens,
+      yellows: newYellows,
+      timestamp: Date.now(),
+    };
+
     setGreens(newGreens);
     setYellows(newYellows);
-  }, [answer, greens, setGreens, yellows, setYellows, guess]);
+    setGuesses(newGuesses);
+    setPersisted(newPersisted);
+  }, [
+    answer,
+    guesses,
+    setGuesses,
+    greens,
+    setGreens,
+    yellows,
+    setYellows,
+    guess,
+    persisted,
+    setPersisted,
+    ui,
+  ]);
 
   const handleClick = React.useCallback(() => {
-    if (guess.length === 5 && guesses.length <= 6) {
+    if (!disabled && guess.length === 5 && guesses.length <= 6) {
       checkGuess();
-      setGuesses([...guesses, ""]);
     }
-  }, [guess, guesses, setGuesses, checkGuess]);
+  }, [disabled, guess, guesses, checkGuess]);
 
   React.useEffect(() => {
     const handleKeyDown = (event) => {
-      if (!disabled && event.key === "Enter") {
+      if (event.key === "Enter") {
         handleClick();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [disabled, handleClick]);
+  }, [handleClick]);
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={specialKeyStyle}>

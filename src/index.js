@@ -1,9 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { getMSToMidnight } from "./utils";
 
 import "./assets/index.css";
+
+// Reload at midnight
+setTimeout(window.location.reload, getMSToMidnight());
 
 ReactDOM.render(
   <React.StrictMode>
