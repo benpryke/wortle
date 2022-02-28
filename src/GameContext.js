@@ -11,7 +11,7 @@ const lightPalette = {
   text: "#222",
   key: "#d9d9d9",
   disabledKey: "#f3f3f3",
-  green: "#4bd841",
+  green: "#5cad48",
   yellow: "#c9b545",
   grey: "#999999",
   outline: "lightgrey",
@@ -20,11 +20,11 @@ const lightPalette = {
 const darkPalette = {
   background: "#333333",
   text: "#fff",
-  key: "#595959",
-  disabledKey: "#4d4d4d",
-  green: "#31be27",
+  key: "#808080",
+  disabledKey: "#404040",
+  green: "#539b41",
   yellow: "#b8a223",
-  grey: "#808080",
+  grey: "#595959",
   outline: "#737373",
 };
 
