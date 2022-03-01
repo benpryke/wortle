@@ -1,5 +1,7 @@
 # Wortle
 
+Live at [wortle.pages.dev](https://wortle.pages.dev)
+
 A German version of the popular game Wordle.
 
 ![Wortle](./public/social-card.png)
@@ -8,6 +10,7 @@ Created in 1 day with no additional dependencies besides React and CRA.
 
 ## Features
 
+- Additional characters: umlauts and eszett.
 - Game statistics.
 - Light and dark themes.
 - Answer pre-validation.
@@ -18,3 +21,4 @@ Created in 1 day with no additional dependencies besides React and CRA.
 - Copy to clipboard share.
 - Keyboard input.
 - Responsive design.
+- Deployed via CloudFlare Pages.
