@@ -1,5 +1,5 @@
 import React from "react";
-import { theme } from "../GameContext";
+import { theme } from "../Theme";
 
 const styles = {
   fontSize: "2rem",

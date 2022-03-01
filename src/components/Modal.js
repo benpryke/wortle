@@ -1,6 +1,7 @@
 import React from "react";
-import { theme } from "../GameContext";
+
 import { Button } from "./Button";
+import { theme } from "../Theme";
 
 const styles = {
   backdrop: {

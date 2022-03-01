@@ -5,8 +5,8 @@ import {
   getPersistedData,
   INITIAL_PERSISTED_STATE,
   setPersistedData,
-  theme,
 } from "./GameContext";
+import { theme } from "./Theme";
 import { Grid } from "./components/Grid";
 import { Header, HEADER_HEIGHT } from "./components/Header";
 import { Instructions } from "./components/Instructions";
@@ -30,8 +30,7 @@ const styles = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  height: `calc(100vh - ${HEADER_HEIGHT + 1}px)`,
-  background: theme.palette.background,
+  height: `calc(100% - ${HEADER_HEIGHT + 1}px)`,
   color: theme.palette.text,
 };
 

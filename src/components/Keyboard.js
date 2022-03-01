@@ -6,7 +6,6 @@ const styles = {
   flexDirection: "column",
   alignItems: "center",
   bottom: 0,
-  marginTop: "1rem",
   marginBottom: "1rem",
   width: "95vw",
   maxWidth: 500,

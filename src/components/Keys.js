@@ -1,5 +1,7 @@
 import React from "react";
-import { GameContext, theme } from "../GameContext";
+
+import { GameContext } from "../GameContext";
+import { theme } from "../Theme";
 
 import config from "../config";
 

@@ -3,12 +3,17 @@ import ReactDOM from "react-dom";
 
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { listenForThemeChanges, setInitialTheme } from "./Theme";
 import { getMSToMidnight } from "./utils";
 
 import "./assets/index.css";
 
 // Reload at midnight
 setTimeout(window.location.reload, getMSToMidnight());
+
+// Set theme
+setInitialTheme();
+listenForThemeChanges();
 
 ReactDOM.render(
   <React.StrictMode>

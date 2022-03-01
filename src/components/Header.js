@@ -1,11 +1,12 @@
 import React from "react";
-import { GameContext, theme } from "../GameContext";
+import { GameContext } from "../GameContext";
+import { theme } from "../Theme";
 
 export const HEADER_HEIGHT = 45;
 
 const styles = {
   root: {
-    width: "100vw",
+    width: "100%",
     height: HEADER_HEIGHT,
     fontFamily: "Sura",
     textAlign: "center",

@@ -1,23 +1,23 @@
 import React from "react";
-import { GameContext, theme } from "../GameContext";
+
+import { GameContext } from "../GameContext";
+import { theme } from "../Theme";
 
 const styles = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: 65,
-  height: 65,
   border: `2px solid ${theme.palette.outline}`,
   boxSizing: "border-box",
-  margin: 2,
-  fontSize: "2rem",
+  position: "relative",
+  aspectRatio: "1 / 1",
   fontWeight: "bold",
   userSelect: "none",
+  fontSize: "1rem",
 };
 
 const fixedStyles = {
   border: "none",
-  color: "white",
 };
 
 export function Tile({ letter, fixed, green, yellow }) {
@@ -32,5 +32,19 @@ export function Tile({ letter, fixed, green, yellow }) {
     style.background = theme.palette.grey;
   }
 
-  return <div style={style}>{letter}</div>;
+  return (
+    <div style={style}>
+      <svg viewBox="0 0 24 24" height="100%">
+        <text
+          x="50%"
+          y="57%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fill={fixed ? "white" : theme.palette.text}
+        >
+          {letter}
+        </text>
+      </svg>
+    </div>
+  );
 }

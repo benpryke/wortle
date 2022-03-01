@@ -15,8 +15,11 @@ const styles = {
     textAlign: "center",
   },
   example: {
-    display: "flex",
-    transform: "scale(0.6)",
+    display: "grid",
+    gridTemplateColumns: "repeat(5, 1fr)",
+    width: "70%",
+    maxWidth: 250,
+    margin: "1rem",
   },
   caption: {
     marginTop: -10,

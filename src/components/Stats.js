@@ -1,8 +1,10 @@
 import React from "react";
-import { GameContext, theme } from "../GameContext";
-import { generateShareBlocks } from "../utils";
+
 import { Button } from "./Button";
+import { GameContext } from "../GameContext";
 import { Modal } from "./Modal";
+import { theme } from "../Theme";
+import { generateShareBlocks } from "../utils";
 
 const styles = {
   heading: {
