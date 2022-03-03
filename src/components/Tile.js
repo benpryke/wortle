@@ -21,8 +21,20 @@ const fixedStyles = {
 };
 
 export function Tile({ letter, fixed, green, yellow }) {
-  const { theme } = React.useContext(GameContext);
+  const { guesses, theme } = React.useContext(GameContext);
   const style = fixed ? { ...styles, ...fixedStyles } : { ...styles };
+
+  const handleClick = () => {
+    const guess = guesses[guesses.length - 1];
+
+    if (guess.length === 5) {
+      window.open(
+        `https://www.dict.cc/?s=${guess.toLowerCase()}`,
+        "_blank",
+        "noopener noreferrer"
+      );
+    }
+  };
 
   if (green) {
     style.background = theme.palette.green;
@@ -33,7 +45,7 @@ export function Tile({ letter, fixed, green, yellow }) {
   }
 
   return (
-    <div style={style}>
+    <div onClick={handleClick} style={styles}>
       <svg viewBox="0 0 24 24" height="100%">
         <text
           x="50%"

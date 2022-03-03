@@ -20,7 +20,6 @@ import { GlobalSnackbar } from "./components/GlobalSnackbar";
 /**
  * TODOS
  *
- * Translate words to English?
  * Animations
  */
 
