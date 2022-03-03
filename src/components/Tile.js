@@ -45,7 +45,7 @@ export function Tile({ letter, fixed, green, yellow }) {
   }
 
   return (
-    <div onClick={handleClick} style={styles}>
+    <div onClick={handleClick} style={style}>
       <svg viewBox="0 0 24 24" height="100%">
         <text
           x="50%"
