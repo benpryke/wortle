@@ -187,6 +187,7 @@ export function EnterKey() {
       const losses = persisted.stats.losses + 1;
       const streak = 0;
       newPersisted.stats = { ...persisted.stats, losses, streak };
+      ui.openSnackbar(`Antwort: ${answer}`);
       setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
     }
 
