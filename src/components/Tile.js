@@ -24,35 +24,30 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    boxSizing: "border-box",
-    border: `2px solid ${theme.palette.outline}`,
     transition: `transform ${TRANSITION_DURATION}ms`,
     transformStyle: "preserve-3d",
   },
   letter: {
+    boxSizing: "border-box",
     position: "absolute",
     backfaceVisibility: "hidden",
+    border: `2px solid ${theme.palette.outline}`,
+    fill: theme.palette.text,
   },
   letterBack: {
+    border: "none",
     transform: "rotateY(180deg)",
+    fill: "white",
   },
   fixed: {
-    border: "none",
     transform: "rotateY(180deg)",
   },
 };
 
-function Letter({ letter, fixed, style }) {
-  const { theme } = React.useContext(GameContext);
+function Letter({ letter, style }) {
   return (
     <svg viewBox="0 0 24 24" height="100%" style={style}>
-      <text
-        x="50%"
-        y="57%"
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fill={fixed ? "white" : theme.palette.text}
-      >
+      <text x="50%" y="57%" textAnchor="middle" dominantBaseline="middle">
         {letter}
       </text>
     </svg>
@@ -94,8 +89,8 @@ export function Tile({ letter, index, rowIndex, fixed, green, yellow }) {
   return (
     <div onClick={handleClick} style={styles.root}>
       <div style={innerStyle}>
-        <Letter letter={letter} fixed={fixed} style={styles.letter} />
-        <Letter letter={letter} fixed={fixed} style={backStyle} />
+        <Letter letter={letter} style={styles.letter} />
+        <Letter letter={letter} style={backStyle} />
       </div>
     </div>
   );
