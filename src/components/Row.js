@@ -16,6 +16,7 @@ export function Row({ index }) {
     .map((_, i) => (
       <Tile
         key={i}
+        index={i}
         rowIndex={index}
         letter={guess[i]}
         fixed={fixed}

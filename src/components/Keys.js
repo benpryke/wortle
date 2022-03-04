@@ -4,6 +4,7 @@ import { GameContext } from "../GameContext";
 import { theme } from "../Theme";
 
 import config from "../config";
+import { TRANSITION_DURATION } from "./Tile";
 
 const styles = {
   display: "flex",
@@ -180,13 +181,13 @@ export function EnterKey() {
         bestStreak,
         solves,
       };
-      ui.setStatsOpen(true);
+      setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
     } else if (guesses.length === 6) {
       // Loser :(
       const losses = persisted.stats.losses + 1;
       const streak = 0;
       newPersisted.stats = { ...persisted.stats, losses, streak };
-      ui.setStatsOpen(true);
+      setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
     }
 
     newPersisted.currentGame = {

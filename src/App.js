@@ -17,12 +17,6 @@ import { Stats } from "./components/Stats";
 import { chooseAnswer, isTimestampToday } from "./utils";
 import { GlobalSnackbar } from "./components/GlobalSnackbar";
 
-/**
- * TODOS
- *
- * Animations
- */
-
 const SNACKBAR_DELAY = 5000;
 
 const styles = {

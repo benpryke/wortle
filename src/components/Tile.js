@@ -3,28 +3,71 @@ import React from "react";
 import { GameContext } from "../GameContext";
 import { theme } from "../Theme";
 
+export const TRANSITION_DURATION = 600;
+
 const styles = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  border: `2px solid ${theme.palette.outline}`,
-  boxSizing: "border-box",
-  position: "relative",
-  aspectRatio: "1 / 1",
-  fontWeight: "bold",
-  userSelect: "none",
-  fontSize: "1rem",
+  root: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    aspectRatio: "1 / 1",
+    fontWeight: "bold",
+    userSelect: "none",
+    fontSize: "1rem",
+    perspective: 1000,
+  },
+  inner: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxSizing: "border-box",
+    border: `2px solid ${theme.palette.outline}`,
+    transition: `transform ${TRANSITION_DURATION}ms`,
+    transformStyle: "preserve-3d",
+  },
+  letter: {
+    position: "absolute",
+    backfaceVisibility: "hidden",
+  },
+  letterBack: {
+    transform: "rotateY(180deg)",
+  },
+  fixed: {
+    border: "none",
+    transform: "rotateY(180deg)",
+  },
 };
 
-const fixedStyles = {
-  border: "none",
-};
+function Letter({ letter, fixed, style }) {
+  const { theme } = React.useContext(GameContext);
+  return (
+    <svg viewBox="0 0 24 24" height="100%" style={style}>
+      <text
+        x="50%"
+        y="57%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill={fixed ? "white" : theme.palette.text}
+      >
+        {letter}
+      </text>
+    </svg>
+  );
+}
 
-export function Tile({ letter, rowIndex, fixed, green, yellow }) {
+export function Tile({ letter, index, rowIndex, fixed, green, yellow }) {
   const { guesses, theme } = React.useContext(GameContext);
-  const style = fixed ? { ...styles, ...fixedStyles } : { ...styles };
   const guess = guesses[rowIndex];
   const rowIsFull = guess && guess.length === 5;
+  const backStyle = { ...styles.letter, ...styles.letterBack };
+  const innerStyle = fixed
+    ? { ...styles.inner, ...styles.fixed }
+    : { ...styles.inner };
+  innerStyle.transitionDelay = `${TRANSITION_DURATION * index * 0.5}ms`;
 
   const handleClick = () => {
     if (rowIsFull) {
@@ -37,30 +80,23 @@ export function Tile({ letter, rowIndex, fixed, green, yellow }) {
   };
 
   if (green) {
-    style.background = theme.palette.green;
+    backStyle.background = theme.palette.green;
   } else if (yellow) {
-    style.background = theme.palette.yellow;
+    backStyle.background = theme.palette.yellow;
   } else if (fixed) {
-    style.background = theme.palette.grey;
+    backStyle.background = theme.palette.grey;
   }
 
   if (rowIsFull) {
-    style.cursor = "pointer";
+    innerStyle.cursor = "pointer";
   }
 
   return (
-    <div onClick={handleClick} style={style}>
-      <svg viewBox="0 0 24 24" height="100%">
-        <text
-          x="50%"
-          y="57%"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fill={fixed ? "white" : theme.palette.text}
-        >
-          {letter}
-        </text>
-      </svg>
+    <div onClick={handleClick} style={styles.root}>
+      <div style={innerStyle}>
+        <Letter letter={letter} fixed={fixed} style={styles.letter} />
+        <Letter letter={letter} fixed={fixed} style={backStyle} />
+      </div>
     </div>
   );
 }
