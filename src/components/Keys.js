@@ -47,7 +47,7 @@ export function Key({ onClick, disabled = false, style = {}, children }) {
 export function LetterKey({ letter }) {
   const { answer, guesses, setGuesses, greens, yellows, theme } =
     React.useContext(GameContext);
-  const disabled = greens.size === 5 || guesses.length >= 6;
+  const disabled = greens.size === 5 || guesses.length > 6;
   const style = {};
   const isGreen = answer
     .split("")
