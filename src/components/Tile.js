@@ -20,14 +20,14 @@ const fixedStyles = {
   border: "none",
 };
 
-export function Tile({ letter, fixed, green, yellow }) {
+export function Tile({ letter, rowIndex, fixed, green, yellow }) {
   const { guesses, theme } = React.useContext(GameContext);
   const style = fixed ? { ...styles, ...fixedStyles } : { ...styles };
+  const guess = guesses[rowIndex];
+  const rowIsFull = guess && guess.length === 5;
 
   const handleClick = () => {
-    const guess = guesses[guesses.length - 1];
-
-    if (guess.length === 5) {
+    if (rowIsFull) {
       window.open(
         `https://www.dict.cc/?s=${guess.toLowerCase()}`,
         "_blank",
@@ -42,6 +42,10 @@ export function Tile({ letter, fixed, green, yellow }) {
     style.background = theme.palette.yellow;
   } else if (fixed) {
     style.background = theme.palette.grey;
+  }
+
+  if (rowIsFull) {
+    style.cursor = "pointer";
   }
 
   return (
