@@ -1,7 +1,10 @@
-export function chooseAnswer(config) {
+function getElapsedDays() {
   const start = new Date("Feb 27 2022").getTime();
-  const elapsedDays = Math.floor((Date.now() - start) / (24 * 60 * 60 * 1000));
-  return config.answers[elapsedDays % config.answers.length];
+  return Math.floor((Date.now() - start) / (24 * 60 * 60 * 1000));
+}
+
+export function chooseAnswer(config) {
+  return config.answers[getElapsedDays() % config.answers.length];
 }
 
 export function isTimestampToday(timestamp) {
@@ -44,9 +47,11 @@ export function isYellow(answer, guess, index) {
 }
 
 export function generateShareBlocks(answer, guesses) {
-  let result = "Heute war mein Wortlespiel\n\n";
+  const day = getElapsedDays() + 1;
+  const nGuesses = guesses.length - 1;
+  let result = `Wortle ${day} ${nGuesses}/6\n\n`;
 
-  for (let i = 0; i < guesses.length - 1; i++) {
+  for (let i = 0; i < nGuesses; i++) {
     for (let j = 0; j < answer.length; j++) {
       if (isGreen(answer, guesses[i], j)) {
         result += "🟩";
