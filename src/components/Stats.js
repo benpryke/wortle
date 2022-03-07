@@ -51,7 +51,7 @@ const styles = {
 };
 
 function getTimeRemaining() {
-  const ms = getMSToMidnight();
+  const ms = getMSToMidnight() || 1;
   const date = new Date(ms);
   const hours = String(Math.floor(ms / 1000 / 60 / 60)).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
