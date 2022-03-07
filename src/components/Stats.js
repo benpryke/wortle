@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { GameContext } from "../GameContext";
 import { Modal } from "./Modal";
 import { theme } from "../Theme";
-import { generateShareBlocks } from "../utils";
+import { generateShareBlocks, getMSToMidnight } from "../utils";
 
 const styles = {
   heading: {
@@ -39,11 +39,25 @@ const styles = {
     textAlign: "right",
     lineHeight: "0.8rem",
   },
+  timer: {
+    display: "flex",
+    justifyContent: "center",
+    margin: "1rem 0",
+  },
   shareButton: {
     display: "flex",
     margin: "1.5rem auto 0",
   },
 };
+
+function getTimeRemaining() {
+  const ms = getMSToMidnight();
+  const date = new Date(ms);
+  const hours = String(Math.floor(ms / 1000 / 60 / 60)).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+}
 
 function Stat({ name, value }) {
   return (
@@ -70,6 +84,7 @@ function BarChart({ label, value, maxValue }) {
 export function Stats() {
   const { answer, guesses, greens, persisted, ui } =
     React.useContext(GameContext);
+  const [timeRemaining, setTimeRemaining] = React.useState(getTimeRemaining());
   const played = persisted.stats.wins + persisted.stats.losses;
   const winPercent =
     Math.round(
@@ -87,6 +102,14 @@ export function Stats() {
     ui.openSnackbar("In die Zwischenablage kopiert");
     event.stopPropagation();
   };
+
+  React.useEffect(() => {
+    const interval = setInterval(
+      () => setTimeRemaining(getTimeRemaining()),
+      1000
+    );
+    return () => clearInterval(interval);
+  }, [setTimeRemaining]);
 
   return (
     <Modal isOpen={ui.statsOpen} close={close}>
@@ -111,6 +134,7 @@ export function Stats() {
           />
         ))}
       </div>
+      <span style={styles.timer}>Nächstes Wortle in {timeRemaining}</span>
       {shareVisible && (
         <Button onClick={share} style={styles.shareButton}>
           Teilen
