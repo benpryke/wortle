@@ -85,7 +85,7 @@ export function Instructions() {
           <strong>Jeden Tag wird ein neues WORTLE verfügbar sein!</strong>
         </p>
 
-        <Button>Spielen Sie!</Button>
+        <Button>Spiel es!</Button>
       </section>
     </Modal>
   );
