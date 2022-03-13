@@ -8,6 +8,7 @@ import {
 } from "./GameContext";
 import { theme } from "./Theme";
 import { Grid } from "./components/Grid";
+import { GlobalErrorBoundary } from "./components/GlobalErrorBoundary";
 import { Header, HEADER_HEIGHT } from "./components/Header";
 import { Instructions } from "./components/Instructions";
 import { Keyboard } from "./components/Keyboard";
@@ -18,8 +19,6 @@ import { chooseAnswer, didMissDay, isTimestampToday } from "./utils";
 import { GlobalSnackbar } from "./components/GlobalSnackbar";
 
 /** Possible TODOs
- * GlobalErrorBoundary
- * Better tracking
  * Localisation
  * Create store
  * Modal show/hide animation
@@ -112,15 +111,17 @@ export function App() {
   }, [persisted]);
 
   return (
-    <GameContext.Provider value={state}>
-      <Instructions />
-      <Stats />
-      <Header />
-      <div style={styles}>
-        <Grid />
-        <Keyboard />
-      </div>
-      <GlobalSnackbar />
-    </GameContext.Provider>
+    <GlobalErrorBoundary>
+      <GameContext.Provider value={state}>
+        <Instructions />
+        <Stats />
+        <Header />
+        <div style={styles}>
+          <Grid />
+          <Keyboard />
+        </div>
+        <GlobalSnackbar />
+      </GameContext.Provider>
+    </GlobalErrorBoundary>
   );
 }
