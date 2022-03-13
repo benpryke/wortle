@@ -37,14 +37,14 @@ export function Instructions() {
   return (
     <Modal isOpen={ui.instructionsOpen} close={close}>
       <h2 style={styles.heading}>Anweisungen</h2>
-      <p>Erraten Sie das WORTLE in sechs Versuchen.</p>
+      <p>Errate das WORTLE mit sechs Versuchen.</p>
       <p>
-        Jede Vermutung muss ein gültiges Wort aus fünf Buchstaben sein. Drücken
-        Sie die Eingabetaste ✔, um zu senden.
+        Jede Vermutung muss ein gültiges Wort aus fünf Buchstaben sein. Drücke
+        die Eingabetaste ✔, um zu senden.
       </p>
       <p>
         Nach jeder Vermutung ändert sich die Farbe der Kacheln, um anzuzeigen,
-        wie nah Ihre Vermutung am Wort war.
+        wie nah deine Vermutung am Wort war.
       </p>
       <section style={styles.examples}>
         <h3 style={styles.heading}>Beispielen</h3>
@@ -56,7 +56,7 @@ export function Instructions() {
           <Tile letter="N" />
         </div>
         <p style={styles.caption}>
-          Der Buchstabe S ist im Wort und an der richtigen Stelle.
+          Der Buchstabe S ist im Wort und am richtigen Platz.
         </p>
 
         <div style={styles.example}>
@@ -67,7 +67,7 @@ export function Instructions() {
           <Tile letter="U" />
         </div>
         <p style={styles.caption}>
-          Der Buchstabe N ist im Wort, aber an der falschen Stelle.
+          Der Buchstabe N ist im Wort, aber am falschen Platz.
         </p>
 
         <div style={styles.example}>
@@ -78,7 +78,7 @@ export function Instructions() {
           <Tile letter="R" fixed />
         </div>
         <p style={styles.caption}>
-          Der Buchstabe R kommt an keiner Stelle im Wort vor.
+          Der Buchstabe R kommt im Wort gar nicht vor.
         </p>
 
         <p>
