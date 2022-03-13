@@ -1,6 +1,8 @@
+const ONE_DAY = 24 * 60 * 60 * 1000;
+
 function getElapsedDays() {
   const start = new Date("Feb 27 2022").getTime();
-  return Math.floor((Date.now() - start) / (24 * 60 * 60 * 1000));
+  return Math.floor((Date.now() - start) / ONE_DAY);
 }
 
 export function chooseAnswer(config) {
@@ -13,10 +15,14 @@ export function isTimestampToday(timestamp) {
   return today === past;
 }
 
+export function didMissDay(timestamp) {
+  const yesterday = new Date(new Date().setHours(0, 0, 0, 0) - ONE_DAY);
+  return timestamp < yesterday;
+}
+
 export function getMSToMidnight() {
   const today = new Date().setHours(0, 0, 0, 0);
-  const oneDay = 24 * 60 * 60 * 1000;
-  const tomorrow = new Date(today + oneDay).getTime();
+  const tomorrow = new Date(today + ONE_DAY).getTime();
   return tomorrow - Date.now();
 }
 
@@ -66,4 +72,38 @@ export function generateShareBlocks(answer, guesses) {
   }
 
   return result + "\nSpielen bei wortle.pages.dev";
+}
+
+function isObject(thing) {
+  return (
+    thing instanceof Object && Object.getPrototypeOf(thing) === Object.prototype
+  );
+}
+
+/**
+ * Ensures `obj` has the same fields as `template`, recursing for nested objects
+ * Note: does not handle type changes
+ * @param {Object} obj Object to normalise
+ * @param {Object} template Basis
+ */
+export function normaliseObject(obj, template) {
+  obj = { ...obj };
+
+  // Copy over missing values from the template
+  Object.entries(template).forEach(([key, value]) => {
+    if (!obj.hasOwnProperty(key)) {
+      obj[key] = value;
+    } else if (isObject(template[key])) {
+      obj[key] = normaliseObject(obj[key], template[key]);
+    }
+  });
+
+  // Remove values not in the template
+  Object.entries(obj).forEach(([key, value]) => {
+    if (!template.hasOwnProperty(key)) {
+      delete obj[key];
+    }
+  });
+
+  return obj;
 }

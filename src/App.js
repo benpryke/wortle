@@ -14,8 +14,21 @@ import { Keyboard } from "./components/Keyboard";
 
 import config from "./config.json";
 import { Stats } from "./components/Stats";
-import { chooseAnswer, isTimestampToday } from "./utils";
+import { chooseAnswer, didMissDay, isTimestampToday } from "./utils";
 import { GlobalSnackbar } from "./components/GlobalSnackbar";
+
+/** Possible TODOs
+ * GlobalErrorBoundary
+ * Better tracking
+ * Localisation
+ * Create store
+ * Modal show/hide animation
+ * Delay key highlight until after flip animations
+ * Win animation
+ * High contrast mode
+ * Hard mode
+ * Feedback form
+ */
 
 const SNACKBAR_DELAY = 5000;
 
@@ -86,6 +99,17 @@ export function App() {
       openSnackbar,
     },
   };
+
+  React.useEffect(() => {
+    if (
+      persisted.stats.streak > 0 &&
+      didMissDay(persisted.lastFinishTimestamp)
+    ) {
+      const newPersisted = { ...persisted };
+      newPersisted.stats = { ...newPersisted.stats, streak: 0 };
+      setPersisted(newPersisted);
+    }
+  }, [persisted]);
 
   return (
     <GameContext.Provider value={state}>

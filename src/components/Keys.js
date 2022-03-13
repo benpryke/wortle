@@ -174,6 +174,7 @@ export function EnterKey() {
       const tries = guesses.length;
       const solves = [...persisted.stats.solves];
       solves.splice(tries - 1, 1, persisted.stats.solves[tries - 1] + 1);
+      newPersisted.lastFinishTimestamp = Date.now();
       newPersisted.stats = {
         ...persisted.stats,
         wins,
@@ -186,6 +187,7 @@ export function EnterKey() {
       // Loser :(
       const losses = persisted.stats.losses + 1;
       const streak = 0;
+      newPersisted.lastFinishTimestamp = Date.now();
       newPersisted.stats = { ...persisted.stats, losses, streak };
       ui.openSnackbar(`Antwort: ${answer}`);
       setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);

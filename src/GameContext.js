@@ -1,11 +1,13 @@
 import React from "react";
 
 import { theme } from "./Theme";
+import { normaliseObject } from "./utils";
 
 const PERSISTED_KEY = "persisted";
 
 export const INITIAL_PERSISTED_STATE = {
   firstTime: true,
+  lastFinishTimestamp: Date.now(),
   stats: {
     wins: 0,
     losses: 0,
@@ -48,7 +50,7 @@ export function getPersistedData() {
     JSON.parse(window.localStorage.getItem(PERSISTED_KEY)) ??
     INITIAL_PERSISTED_STATE;
   data.currentGame.greens = new Set(data.currentGame.greens);
-  return data;
+  return normaliseObject(data, INITIAL_PERSISTED_STATE);
 }
 
 export function setPersistedData(data) {
