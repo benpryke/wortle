@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GameContext } from "../GameContext";
+import { logEvent } from "../analytics";
 import { theme } from "../Theme";
 
 import config from "../config";
@@ -154,6 +155,7 @@ export function EnterKey() {
     const newYellows = [...yellows];
     const newGuesses = [...guesses, ""];
     const newPersisted = { ...persisted };
+    logEvent("guess", { word: guess, guessNumber: guesses.length });
 
     guess.split("").forEach((letter, i) => {
       if (answer[i] === letter) {
@@ -182,6 +184,7 @@ export function EnterKey() {
         bestStreak,
         solves,
       };
+      logEvent("win", { answer, guessNumber: guesses.length });
       setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
     } else if (guesses.length === 6) {
       // Loser :(
@@ -189,6 +192,7 @@ export function EnterKey() {
       const streak = 0;
       newPersisted.lastFinishTimestamp = Date.now();
       newPersisted.stats = { ...persisted.stats, losses, streak };
+      logEvent("lose", { answer });
       ui.openSnackbar(`Antwort: ${answer}`);
       setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
     }
