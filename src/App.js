@@ -19,6 +19,8 @@ import { chooseAnswer, didMissDay, isTimestampToday } from "./utils";
 import { GlobalSnackbar } from "./components/GlobalSnackbar";
 
 /** Possible TODOs
+ * Listen for window re-focus to improve reload at/after midnight
+ * PWA - install button
  * Localisation
  * Create store
  * Modal show/hide animation
