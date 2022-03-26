@@ -44,7 +44,7 @@ export function Instructions() {
       </p>
       <p>
         Nach jeder Vermutung ändert sich die Farbe der Kacheln, um anzuzeigen,
-        wie nah deine Vermutung am Wort war.
+        wie nah deine Vermutung zum Wort war.
       </p>
       <section style={styles.examples}>
         <h3 style={styles.heading}>Beispielen</h3>
@@ -85,7 +85,7 @@ export function Instructions() {
           <strong>Jeden Tag wird ein neues WORTLE verfügbar sein!</strong>
         </p>
 
-        <Button>Spiel es!</Button>
+        <Button>Start!</Button>
       </section>
     </Modal>
   );
