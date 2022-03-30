@@ -2,8 +2,10 @@ import React from "react";
 
 import { GameContext } from "../GameContext";
 import { theme } from "../Theme";
+import { hasWon } from "../utils";
 
-export const TRANSITION_DURATION = 600;
+export const FLIP_DURATION_MS = 600;
+const WIN_ANIMATION_MS = 200;
 
 const styles = {
   root: {
@@ -24,7 +26,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    transition: `transform ${TRANSITION_DURATION}ms`,
+    transition: `transform ${FLIP_DURATION_MS}ms`,
     transformStyle: "preserve-3d",
   },
   letter: {
@@ -55,14 +57,16 @@ function Letter({ letter, style }) {
 }
 
 export function Tile({ letter, index, rowIndex, fixed, green, yellow }) {
-  const { guesses, theme } = React.useContext(GameContext);
+  const { guesses, greens, theme } = React.useContext(GameContext);
   const guess = guesses[rowIndex];
   const rowIsFull = guess && guess.length === 5;
   const backStyle = { ...styles.letter, ...styles.letterBack };
+  const rootStyle = fixed ? { ...styles.root, zIndex: 10 } : styles.root;
   const innerStyle = fixed
     ? { ...styles.inner, ...styles.fixed }
     : { ...styles.inner };
-  innerStyle.transitionDelay = `${TRANSITION_DURATION * index * 0.5}ms`;
+  const flipDelay = FLIP_DURATION_MS * 0.5;
+  innerStyle.transitionDelay = `${flipDelay * index}ms`;
 
   const handleClick = () => {
     if (rowIsFull) {
@@ -82,12 +86,18 @@ export function Tile({ letter, index, rowIndex, fixed, green, yellow }) {
     backStyle.background = theme.palette.grey;
   }
 
+  if (hasWon(greens)) {
+    backStyle.animation = `${FLIP_DURATION_MS}ms linear wave`;
+    backStyle.animationDelay = `${flipDelay * 5 + WIN_ANIMATION_MS * index}ms`;
+    backStyle.animationIterationCount = 2;
+  }
+
   if (rowIsFull) {
     innerStyle.cursor = "pointer";
   }
 
   return (
-    <div onClick={handleClick} style={styles.root}>
+    <div onClick={handleClick} style={rootStyle}>
       <div style={innerStyle}>
         <Letter letter={letter} style={styles.letter} />
         <Letter letter={letter} style={backStyle} />

@@ -5,7 +5,8 @@ import { logEvent } from "../analytics";
 import { theme } from "../Theme";
 
 import config from "../config";
-import { TRANSITION_DURATION } from "./Tile";
+import { FLIP_DURATION_MS } from "./Tile";
+import { hasWon } from "../utils";
 
 const styles = {
   display: "flex",
@@ -165,7 +166,7 @@ export function EnterKey() {
       }
     });
 
-    if (newGreens.size === 5) {
+    if (hasWon(newGreens)) {
       // Winner :D
       const wins = persisted.stats.wins + 1;
       const streak = persisted.stats.streak + 1;
@@ -185,7 +186,7 @@ export function EnterKey() {
         solves,
       };
       logEvent("win", { answer, guessNumber: guesses.length });
-      setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
+      setTimeout(() => ui.setStatsOpen(true), FLIP_DURATION_MS * 5);
     } else if (guesses.length === 6) {
       // Loser :(
       const losses = persisted.stats.losses + 1;
@@ -194,7 +195,7 @@ export function EnterKey() {
       newPersisted.stats = { ...persisted.stats, losses, streak };
       logEvent("lose", { answer });
       ui.openSnackbar(`Antwort: ${answer}`);
-      setTimeout(() => ui.setStatsOpen(true), TRANSITION_DURATION * 4);
+      setTimeout(() => ui.setStatsOpen(true), FLIP_DURATION_MS * 5);
     }
 
     newPersisted.currentGame = {

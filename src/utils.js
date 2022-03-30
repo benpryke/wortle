@@ -1,8 +1,8 @@
-const ONE_DAY = 24 * 60 * 60 * 1000;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 function getElapsedDays() {
   const start = new Date("Feb 27 2022").getTime();
-  return Math.floor((Date.now() - start) / ONE_DAY);
+  return Math.floor((Date.now() - start) / ONE_DAY_MS);
 }
 
 export function chooseAnswer(config) {
@@ -16,13 +16,13 @@ export function isTimestampToday(timestamp) {
 }
 
 export function didMissDay(timestamp) {
-  const yesterday = new Date(new Date().setHours(0, 0, 0, 0) - ONE_DAY);
+  const yesterday = new Date(new Date().setHours(0, 0, 0, 0) - ONE_DAY_MS);
   return timestamp < yesterday;
 }
 
 export function getMSToMidnight() {
   const today = new Date().setHours(0, 0, 0, 0);
-  const tomorrow = new Date(today + ONE_DAY).getTime();
+  const tomorrow = new Date(today + ONE_DAY_MS).getTime();
   return tomorrow - Date.now();
 }
 
@@ -50,6 +50,10 @@ export function isYellow(answer, guess, index) {
   // `guess`?
   const priors = count(guess.substr(0, index));
   return priors < repeats;
+}
+
+export function hasWon(greens) {
+  return greens.size === 5;
 }
 
 export function generateShareBlocks(answer, guesses) {
