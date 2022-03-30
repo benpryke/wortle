@@ -2,7 +2,7 @@ import React from "react";
 
 import { GameContext } from "../GameContext";
 import { Tile } from "./Tile";
-import { isGreen, isYellow } from "../utils";
+import { isGreen, isYellow } from "../lib/gameplay";
 
 export function Row({ index }) {
   const { answer, guesses } = React.useContext(GameContext);

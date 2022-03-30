@@ -6,17 +6,21 @@ import {
   INITIAL_PERSISTED_STATE,
   setPersistedData,
 } from "./GameContext";
-import { theme } from "./Theme";
-import { Grid } from "./components/Grid";
-import { GlobalErrorBoundary } from "./components/GlobalErrorBoundary";
-import { Header, HEADER_HEIGHT } from "./components/Header";
-import { Instructions } from "./components/Instructions";
-import { Keyboard } from "./components/Keyboard";
+import { theme } from "./theme";
+import {
+  GlobalErrorBoundary,
+  GlobalSnackbar,
+  Grid,
+  Header,
+  Instructions,
+  Keyboard,
+  Stats,
+} from "./components";
+import { HEADER_HEIGHT } from "./components/Header";
+import { chooseAnswer } from "./lib/gameplay";
+import { didMissDay, isTimestampToday } from "./lib/timing";
 
 import config from "./config.json";
-import { Stats } from "./components/Stats";
-import { chooseAnswer, didMissDay, isTimestampToday } from "./utils";
-import { GlobalSnackbar } from "./components/GlobalSnackbar";
 
 /** Possible TODOs
  * Listen for window re-focus to improve reload at/after midnight
@@ -25,7 +29,6 @@ import { GlobalSnackbar } from "./components/GlobalSnackbar";
  * Create store
  * Modal show/hide animation
  * Delay key highlight until after flip animations
- * Win animation
  * High contrast mode
  * Hard mode
  * Feedback form

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button } from "./Button";
-import { theme } from "../Theme";
+import { theme } from "../theme";
 
 const styles = {
   root: {

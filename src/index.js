@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { listenForThemeChanges, setInitialTheme } from "./Theme";
-import { getMSToMidnight } from "./utils";
+import { listenForThemeChanges, setInitialTheme } from "./theme";
+import { getMSToMidnight } from "./lib/timing";
 
 import "./assets/index.css";
 

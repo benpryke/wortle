@@ -1,5 +1,5 @@
 import React from "react";
-import { theme } from "../Theme";
+import { theme } from "../theme";
 
 const styles = {
   fontSize: "2rem",

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { theme } from "./Theme";
-import { normaliseObject } from "./utils";
+import { theme } from "./theme";
+import { normaliseObject } from "./lib/object";
 
 const PERSISTED_KEY = "persisted";
 

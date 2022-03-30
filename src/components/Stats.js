@@ -3,8 +3,9 @@ import React from "react";
 import { Button } from "./Button";
 import { GameContext } from "../GameContext";
 import { Modal } from "./Modal";
-import { theme } from "../Theme";
-import { generateShareBlocks, getMSToMidnight } from "../utils";
+import { theme } from "../theme";
+import { generateShareBlocks } from "../lib/social";
+import { getMSToMidnight } from "../lib/timing";
 
 const styles = {
   heading: {

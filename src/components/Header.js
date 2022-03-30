@@ -1,6 +1,6 @@
 import React from "react";
 import { GameContext } from "../GameContext";
-import { theme } from "../Theme";
+import { theme } from "../theme";
 
 export const HEADER_HEIGHT = 45;
 

@@ -1,8 +1,8 @@
 import React from "react";
 
 import { GameContext } from "../GameContext";
-import { theme } from "../Theme";
-import { hasWon } from "../utils";
+import { theme } from "../theme";
+import { hasWon } from "../lib/gameplay";
 
 export const FLIP_DURATION_MS = 600;
 const WIN_ANIMATION_MS = 200;

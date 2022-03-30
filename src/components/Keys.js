@@ -2,11 +2,11 @@ import React from "react";
 
 import { GameContext } from "../GameContext";
 import { logEvent } from "../analytics";
-import { theme } from "../Theme";
+import { theme } from "../theme";
 
 import config from "../config";
 import { FLIP_DURATION_MS } from "./Tile";
-import { hasWon } from "../utils";
+import { hasWon } from "../lib/gameplay";
 
 const styles = {
   display: "flex",
@@ -31,7 +31,7 @@ const specialKeyStyle = {
   fontSize: "1.5rem",
 };
 
-export function Key({ onClick, disabled = false, style = {}, children }) {
+function Key({ onClick, disabled = false, style = {}, children }) {
   const handleClick = (event) => !disabled && onClick(event);
   style = { ...styles, ...style };
 
