@@ -2,11 +2,10 @@ import React from "react";
 
 import { GameContext } from "../GameContext";
 import { logEvent } from "../analytics";
-import { theme } from "../theme";
-
 import config from "../config";
-import { FLIP_DURATION_MS } from "./Tile";
 import { hasWon } from "../lib/gameplay";
+import { theme } from "../theme";
+import { FLIP_DURATION_MS } from "./Tile";
 
 const styles = {
   display: "flex",
@@ -46,7 +45,7 @@ function Key({ onClick, disabled = false, style = {}, children }) {
   );
 }
 
-export function LetterKey({ letter }) {
+export function LetterKey({ letter, toUpperCaseResult = null }) {
   const { answer, guesses, setGuesses, greens, yellows, theme } =
     React.useContext(GameContext);
   const disabled = greens.size === 5 || guesses.length > 6;
@@ -86,14 +85,18 @@ export function LetterKey({ letter }) {
 
   React.useEffect(() => {
     const handleKeyDown = (event) => {
-      if (!disabled && event.key.toUpperCase() === letter) {
+      const upperKey = event.key.toUpperCase();
+      if (
+        !disabled &&
+        (upperKey === letter || upperKey === toUpperCaseResult)
+      ) {
         handleClick();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [letter, disabled, handleClick]);
+  }, [letter, toUpperCaseResult, disabled, handleClick]);
 
   return (
     <Key onClick={handleClick} disabled={disabled} style={style}>

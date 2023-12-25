@@ -49,7 +49,7 @@ export function Keyboard() {
       </div>
       <div style={rowStyle}>
         <EnterKey />
-        <LetterKey letter="ẞ" />
+        <LetterKey letter="ẞ" toUpperCaseResult="SS" />
         <LetterKey letter="Y" />
         <LetterKey letter="X" />
         <LetterKey letter="C" />
