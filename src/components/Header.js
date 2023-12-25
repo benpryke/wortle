@@ -1,4 +1,5 @@
 import React from "react";
+
 import { GameContext } from "../GameContext";
 import { theme } from "../theme";
 
@@ -28,7 +29,7 @@ const styles = {
     position: "absolute",
     right: "0.25rem",
   },
-  action: {
+  link: {
     marginLeft: "0.25rem",
     marginRight: "0.25rem",
     fontSize: "1.5rem",
@@ -36,8 +37,6 @@ const styles = {
     height: "2.5rem",
     userSelect: "none",
     cursor: "pointer",
-  },
-  link: {
     textDecoration: "none",
   },
 };
@@ -49,23 +48,29 @@ export function Header() {
   return (
     <div style={styles.root}>
       <div style={styles.left}>
-        <div style={styles.action}>
-          <a
-            href="https://github.com/benpryke/wortle"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={styles.link}
-          >
-            👨‍💻
-          </a>
-        </div>
+        <a
+          href="https://benpryke.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={styles.link}
+        >
+          🏠
+        </a>
+        <a
+          href="https://github.com/benpryke/wortle"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={styles.link}
+        >
+          👨‍💻
+        </a>
       </div>
       <h1 style={styles.title}>Wortle</h1>
       <div style={styles.right}>
-        <div onClick={openStats} style={styles.action}>
+        <div onClick={openStats} style={styles.link}>
           📊
         </div>
-        <div onClick={openInstructions} style={styles.action}>
+        <div onClick={openInstructions} style={styles.link}>
           ?
         </div>
       </div>
