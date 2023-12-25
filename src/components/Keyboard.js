@@ -1,4 +1,5 @@
 import React from "react";
+
 import { BackspaceKey, EnterKey, LetterKey } from "./Keys";
 
 const styles = {
@@ -48,7 +49,7 @@ export function Keyboard() {
       </div>
       <div style={rowStyle}>
         <EnterKey />
-        <LetterKey letter="ß" />
+        <LetterKey letter="ẞ" />
         <LetterKey letter="Y" />
         <LetterKey letter="X" />
         <LetterKey letter="C" />
