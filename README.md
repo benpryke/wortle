@@ -1,6 +1,6 @@
 # Wortle
 
-Live at [wortle.pages.dev](https://wortle.pages.dev)
+Live at [wortle.xyz](https://wortle.xyz)
 
 A German version of the popular game Wordle.
 
